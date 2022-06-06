@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="unicode" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=unicode" />
+<meta name="generator" content="Docutils 0.3.7: http://docutils.sourceforge.net/" />
+<title>PyPI Browser</title>
+<meta name="author" content="David Boddie &lt;david&#64;boddie.org.uk&gt;" />
+<meta name="date" content="2006-09-05" />
+<link rel="stylesheet" href="default.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="pypi-browser">
+<h1 class="title">PyPI Browser</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>David Boddie &lt;<a class="reference" href="mailto:david&#64;boddie.org.uk">david&#64;boddie.org.uk</a>&gt;</td></tr>
+<tr><th class="docinfo-name">Date:</th>
+<td>2006-09-05</td></tr>
+</tbody>
+</table>
+<p><em>Note: This text is marked up using reStructuredText formatting. It should be
+readable in a text editor but can be processed to produce versions of this
+document in other formats.</em></p>
+<div class="contents topic" id="contents">
+<p class="topic-title first"><a name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#introduction" id="id1" name="id1">Introduction</a></li>
+<li><a class="reference" href="#installing-and-running-the-browser" id="id2" name="id2">Installing and Running the Browser</a></li>
+<li><a class="reference" href="#configuring-the-browser" id="id3" name="id3">Configuring the Browser</a></li>
+<li><a class="reference" href="#using-the-browser" id="id4" name="id4">Using the Browser</a><ul>
+<li><a class="reference" href="#opening-a-connection" id="id5" name="id5">Opening a Connection</a></li>
+<li><a class="reference" href="#examining-and-downloading-packages" id="id6" name="id6">Examining and Downloading Packages</a></li>
+<li><a class="reference" href="#searching-the-package-index" id="id7" name="id7">Searching the Package Index</a></li>
+<li><a class="reference" href="#downloading-packages" id="id8" name="id8">Downloading Packages</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#exiting-the-browser" id="id9" name="id9">Exiting the Browser</a></li>
+<li><a class="reference" href="#architecture" id="id10" name="id10">Architecture</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h1><a class="toc-backref" href="#id1" name="introduction">Introduction</a></h1>
+<p>PyPI Browser is a graphical user interface (GUI) browser for the <a class="reference" href="http://www.python.org/pypi">Python Package Index</a> (PyPI)
+that aims to make it easier for users to find and download useful Python software from a central
+repository. It provides facilities for searching the package index, can display information
+about individual packages, allows packages to be marked so that they can be downloaded together,
+and records information about existing packages so that new ones can be highlighted.</p>
+</div>
+<div class="section" id="installing-and-running-the-browser">
+<h1><a class="toc-backref" href="#id2" name="installing-and-running-the-browser">Installing and Running the Browser</a></h1>
+<p>PyPI Browser is designed to be installed using a standard <cite>setup.py</cite> script to install the
+Python sources in the correct places on your system, but it can also be run from within the
+directory that is created when its archive is unpacked.</p>
+<p>To build and install the browser, enter the unpacked directory and type the following at a
+command prompt:</p>
+<pre class="literal-block">
+python setup.py build
+</pre>
+<p>Then, with suitable privileges, install the application like this:</p>
+<pre class="literal-block">
+python setup.py install
+</pre>
+<p>The <em>pypibrowser.py</em> executable should now be available for use.</p>
+<p>To run the browser from within the unpacked source directory, just type the following
+instead:</p>
+<pre class="literal-block">
+python pypibrowser.py
+</pre>
+<p>Alternatively, this file can be run from within a suitable file manager.</p>
+</div>
+<div class="section" id="configuring-the-browser">
+<h1><a class="toc-backref" href="#id3" name="configuring-the-browser">Configuring the Browser</a></h1>
+<p>The first thing you should do once the browser is running is to open the <strong>Configure Browser</strong>
+dialog by opening the <strong>Settings</strong> menu and selecting the <strong>Configure Browser...</strong> menu item.
+In this dialog, you should specify the download directory you want to use for software you
+request from the package index.</p>
+<p>You can also specify some preferences for the package formats you want software to be
+supplied in. By default, the package index URL is the one used for the Python Package Index
+at <em>python.org</em> - you only need to customize this if you have a private package index.</p>
+<p>The shortcuts used for the menu items can be customized in the browser's <strong>Edit Shortcuts</strong>
+dialog. To change any of the shortcuts for the items in the <strong>Description</strong> column, double
+click on the item next to it in the <strong>Shortcut</strong> column to activate it, then type the key
+combination you want to use. If you want to clear a shortcut, activate its item in the same
+way and simply click on the cancel symbol (an <strong>X</strong>) in the item. Click <strong>OK</strong> to keep any
+changes you make to the shortcuts, or click <strong>Cancel</strong> to discard them.</p>
+</div>
+<div class="section" id="using-the-browser">
+<h1><a class="toc-backref" href="#id4" name="using-the-browser">Using the Browser</a></h1>
+<p>The browser is arranged in the same way as most applications:</p>
+<ul class="simple">
+<li>The menu bar provides access to application-wide actions, such as opening a connection
+and exiting.</li>
+<li>The region in the centre of the window is a view onto the contents of a package index
+and is disabled until you open a connection.</li>
+<li>The controls at the bottom of the window are used to search the package index.</li>
+</ul>
+<p>Searches restrict the packages shown in the main view to include only those that are
+relevant.</p>
+<div class="section" id="opening-a-connection">
+<h2><a class="toc-backref" href="#id5" name="opening-a-connection">Opening a Connection</a></h2>
+<p>To open a connection to the package index, open the <strong>File</strong> menu and select the <strong>Open...</strong>
+item, or press <strong>Ctrl O</strong> on the keyboard (<strong>Command O</strong> on Mac OS X). The <strong>Open Index</strong>
+dialog should automatically contain a suitable URL for a package index, and you can accept
+this by clicking the <strong>OK</strong> button. The browser will fetch information about all available
+packages and update the main window - this may take a moment.</p>
+</div>
+<div class="section" id="examining-and-downloading-packages">
+<h2><a class="toc-backref" href="#id6" name="examining-and-downloading-packages">Examining and Downloading Packages</a></h2>
+<p>Each item in the main window represents a package in the index. Since these may have more than
+one release associated with them, they are shown as parent items in a tree view. Clicking on
+the node next to a package name will cause the list of releases for that package to be
+displayed. You can double-click on a package or a release to see more information about it.</p>
+<p>Releases that have associated download information are shown as checkable items in the tree
+view. You can check as many of these as you like to indicate that you want to download them
+later. The list of marked releases can be shown by applying the marked package filter: open
+the <strong>Packages</strong> menu and check the <strong>Filter Marked</strong> item. Uncheck this menu item to switch
+this filter off.</p>
+<p>If you have run PyPI Browser before, you can check to see if any new packages have been added
+to the package index by applying the new package filter: open the <strong>Packages</strong> menu and check
+the <strong>Filter New</strong> item. Uncheck this menu item to switch this filter off.</p>
+</div>
+<div class="section" id="searching-the-package-index">
+<h2><a class="toc-backref" href="#id7" name="searching-the-package-index">Searching the Package Index</a></h2>
+<p>Each release of a package in the package index has several fields associated with it that can
+be searched for a series of search terms. The combobox at the bottom of the main window allows
+you to select which field should be searched in the index. The line edit next to the combobox
+is used to enter a space-separated set of words that must appear in the field of any matching
+releases.</p>
+<p>The current search is executed when you click the <strong>Search</strong> button, press the <strong>Return</strong> key
+in the line edit, or change the current search field in the combobox. The contents of the main
+view will be updated to show any packages that match your search terms.</p>
+</div>
+<div class="section" id="downloading-packages">
+<h2><a class="toc-backref" href="#id8" name="downloading-packages">Downloading Packages</a></h2>
+<p>Once you have selected all the packages you want to download, open the <strong>Packages</strong> menu and
+select the <strong>Download...</strong> item, or press <strong>Ctrl Return</strong> (<strong>Command Return</strong> on Mac OS X).
+The <strong>Download Packages</strong> dialog will open and the browser will begin to download the releases
+that you marked earlier from the package index. The progress of each download operation is shown
+alongside its name and the name of the file that will be saved in the configured download
+directory.</p>
+<p>Click the <strong>Stop</strong> button at any time to stop the download operations.</p>
+<p>If a package cannot be downloaded, either <strong>Failed</strong> or the URL of its home page will be shown
+in its progress indicator. You can launch a web browser by clicking on any home page URLs shown,
+or return to the main window and get more information about the packages that could not be
+downloaded. Any partially downloaded packages will be deleted.</p>
+<p>Click <strong>Open Directory</strong> to open the download directory using your system's web or file browser.</p>
+</div>
+</div>
+<div class="section" id="exiting-the-browser">
+<h1><a class="toc-backref" href="#id9" name="exiting-the-browser">Exiting the Browser</a></h1>
+<p>Exit the browser by opening the <strong>File</strong> menu and selecting the <strong>Exit</strong> item or by pressing
+<strong>Ctrl Q</strong> (<strong>Command Q</strong> on Mac OS X). Alternatively, you can simply close the main window to
+exit.</p>
+<p>Currently, the browser will notify you if you try to exit while there are marked packages.
+Future releases of the browser may prompt you to save this information or automatically save
+it along with other package information in its configuration file.</p>
+</div>
+<div class="section" id="architecture">
+<h1><a class="toc-backref" href="#id10" name="architecture">Architecture</a></h1>
+<p>PyPI Browser uses the <a class="reference" href="http://www.riverbankcomputing.co.uk/pyqt/">PyQt4</a> bindings to the <a class="reference" href="http://www.trolltech.com/products/qt/">Qt 4</a> framework for its graphical user
+interface. Behind the scenes, it uses <em>xmlrpclib</em> to access the Python Package Index's XML-RPC
+interface to obtain information about available packages.</p>
+</div>
+</div>
+</body>
+</html>
