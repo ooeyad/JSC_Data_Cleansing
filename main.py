@@ -831,6 +831,30 @@ class Filtered_Data_Json(Resource):
 
         return df
 
+    def delete_cols_from_df(self,chosen_csv):
+        print("start reading CSV!")
+        df = pd.read_csv(chosen_csv, index_col=0)
+
+        df["ID_NUMBER"] = df["ID_NUMBER"].fillna(0)
+
+        df['DOB'] = df['DOB'].str.strip()
+        df["DOB"] = df["DOB"].fillna('')
+        df["NAT"] = df["NAT"].astype("str", errors="ignore")
+        df['NAT'] = df['NAT'].str.strip()
+        df["NAT"] = df["NAT"].fillna('')
+        df["NAT"] = df["NAT"].replace("nan", "")
+        df['ID_NUMBER'] = df['ID_NUMBER'].astype(np.int64)
+        df["ID_NUMBER"] = df["ID_NUMBER"].astype("str", errors="ignore")
+        df['ID_NUMBER'] = df['ID_NUMBER'].str.strip()
+        df["MOBILE_NUMBER"] = df["MOBILE_NUMBER"].astype("str", errors="ignore")
+        df.drop(columns=['MOBILE_NUMBER'], inplace=True)
+        
+        df = df.fillna("")
+
+        df = df.reset_index(drop=True)
+
+        return df
+        
     def get(self):
         path = "./data"
         chosen_csv = os.path.join(path, 'saved_ds_fltr.csv')
