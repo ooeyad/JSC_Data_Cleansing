@@ -132,30 +132,6 @@ class Golden_Record(Resource):
 
         return df
 
-    def delete_col_df(self,chosen_csv):
-        df = pd.read_csv(chosen_csv, index_col=0)
-        df = df[:20000]
-        df["ID_NUMBER"] = df["ID_NUMBER"].fillna(0)
-        df['DOB'] = df['DOB'].str.strip()
-        df["DOB"] = df["DOB"].fillna('')
-        df["NAT"] = df["NAT"].astype("str", errors="ignore")
-        df['NAT'] = df['NAT'].str.strip()
-        df["NAT"] = df["NAT"].fillna('')
-        # df["NAT"] = df["NAT"].replace("nan", "")
-        print("empty nats " + str(df['NAT'] == 'nan'))
-        df['ID_NUMBER'] = df['ID_NUMBER'].astype(np.int64)
-        df["ID_NUMBER"] = df["ID_NUMBER"].astype("str", errors="ignore")
-        df['ID_NUMBER'] = df['ID_NUMBER'].str.strip()
-
-        df.drop(columns=["MOBILE_NUMBER], inplace=True)
-        
-        df["PDF_PATH"] = df["PDF_PATH"].astype("str", errors="ignore").replace("nan", "")
-        df["ID_PATH"] = df["ID_PATH"].astype("str", errors="ignore").replace("nan", "")
-        df = df.fillna("")
-
-        df = df.reset_index(drop=True)
-
-        return df
         
     def verify_cells(self):
         df = self.df
